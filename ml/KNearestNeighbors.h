@@ -20,6 +20,8 @@ class KNearestNeighbors
 
 #include <iostream>
 
+// TODO Find better way of passing count - ideally not having to pass it all
+// TODO Detect and notify if lists are of different lengths...
 template <typename T>
 bool KNearestNeighbors::binaryClassification(T vector1[], T vector2[], bool b[], unsigned long count, T value1, T value2) const
 {
@@ -33,7 +35,6 @@ bool KNearestNeighbors::binaryClassification(T vector1[], T vector2[], bool b[],
             result = b[i];
             minDistance = distance;
         }
-        std::cout << distance << " " << minDistance << std::endl;
     }
     return result;
 }
