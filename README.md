@@ -6,6 +6,10 @@ By AI, I am referring to the definition where AI encompasses the subset Machine 
 
 Note that much of the Python AI stuff is already written in fast and efficient languages such as C, C++ (and Rust?) and most of the gruntwork is done in an enviroment where the scripty, loosely and dynamically typed nature of Python doesn't significantly impact performance. Most of this stuff is written by highly knowledgeable individuals and teams who have done a way better job than myself. If you're under the impression that my C++ implementation of some of these algorithms will improve performance, you will probably be disappointed. If you're looking for portability and joining me in my learning journey (and perhaps contributing a bit), you've come to the right place.
 
+## Version of c++
+
+Initial version will be C++17, but I will probably move to C++20 if I find use-cases for C++20 features.
+
 ## Note on complexity
 
 My development philosophy follows this list of priorities in descending order:
@@ -23,6 +27,11 @@ Unit tests are implemented using Google Test which is therefore a prerequisite i
 # Todo
 
 * Improve tests for KNN
+* Add function to split data into training and test sets
+* Add scoring to KNN to measure performance
+* Read CSV to structure
+
+Will also try to add abstract base classes for algorithms that share input/output, but avoiding runtime polymorphism where it will hurt performance.
 
 ## Adventurous todo
 
