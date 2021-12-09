@@ -1,4 +1,4 @@
-# AIPP
+# Introduction
 
 Artificial Intelligence Library written in C++. Although it is mainly an exercise to improve my knowledge and skills in c++ and AI, it is also a portable alternative to enable the usage of AI in environments where Python may not be the best fit such as embedded environments.
 
@@ -16,11 +16,25 @@ My development philosophy follows this list of priorities in descending order:
 
 Most of my prototyping will be done using specific types or very basic template usage and mirror the description of the actual algorithms. From there, I will add flexibility through abstractions (more aggressive templating) and local optimizations to remove obvious bottlenecks. If the code looks too advanced, try looking through the commit history for an earlier version of the specific file(s). Although maintainability has high priority, some degree of complexity is unavoidable in areas where performance matters.
 
-## Testing
+# Prequisites and build environment
 
-Unit tests are implemented using Google Test which is therefore a prerequisite if you want to run tests.
+Unit tests are implemented using Google Test which is therefore a prerequisite if you want to run tests. Code is built using gcc 9.3.0.
 
-## Release notes - v0.0
+# Todo
+
+* Improve tests for KNN
+
+## Adventurous todo
+
+* Multithreaded version of KNN
+
+# Release History
+
+# v0.1 - 9.12.21
+
+Implemented KNN and added simple makefile.
+
+# Initial release
 
 This is barely a placeholder for future work as per now. My main goal in the near future is to establish interfaces for models, data and the relationship between the two. Ideally, I want it to be simple to switch between models of the same type (eg. binary classification models) and data source types (arrays, std::vector, std::array etc).
 
