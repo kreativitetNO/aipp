@@ -1,4 +1,6 @@
+#include <functional>
 #include <gtest/gtest.h>
+#include <tuple>
 #include "../KNearestNeighbors.h"
 
 class KNearestNeighborTestFixture : public ::testing::Test
@@ -10,7 +12,7 @@ class KNearestNeighborTestFixture : public ::testing::Test
 
 TEST_F(KNearestNeighborTestFixture, ConstructorSetsKValue)
 {
-    KNearestNeighbors instance { 3ul };
+    KNearestNeighbors<int> instance { 3ul };
     auto expected = 3ul;
 
     ASSERT_EQ(instance.kValue(), expected);
@@ -18,7 +20,7 @@ TEST_F(KNearestNeighborTestFixture, ConstructorSetsKValue)
 
 TEST_F(KNearestNeighborTestFixture, ConstructorWithoutArgumentSetsKValueTo1)
 {
-    KNearestNeighbors instance;
+    KNearestNeighbors<int> instance;
     auto expected = 1ul;
 
     ASSERT_EQ(instance.kValue(), expected);
@@ -27,7 +29,7 @@ TEST_F(KNearestNeighborTestFixture, ConstructorWithoutArgumentSetsKValueTo1)
 TEST_F(KNearestNeighborTestFixture, ConstructorWitEvenArgumentFailsAssertion)
 {
     ASSERT_DEATH({
-        KNearestNeighbors instance { 2 };
+        KNearestNeighbors<int> instance { 2 };
     },
         "kValue % 2 == 1"
     );
@@ -35,18 +37,31 @@ TEST_F(KNearestNeighborTestFixture, ConstructorWitEvenArgumentFailsAssertion)
 
 TEST_F(KNearestNeighborTestFixture, SimpleClassification)
 {
-    int arr1[] { 1, 2 };
-    int arr2[] { 1, 2 };
-    bool b[] { true, false };
+    KNearestNeighbors<int, int> instance { 1 };
 
-    int value1 = 0;
-    int value2 = 0;
+    std::vector<std::tuple<int, int>> trainingData {
+        { 1, 1 },
+        { 2, 2 },
+        { 3, 3 },
+        { 4, 4 },
+        { 5, 5 },
+        { 6, 6 }
+    };
 
-    bool expected = true;
-    
-    KNearestNeighbors instance;
+    std::vector<int> labels {
+        false, false, false, true, true, true
+    };
 
-    int actual = instance.binaryClassification(arr1, arr2, b, 2, value1, value2);
+    instance.train(trainingData, labels);
 
-    ASSERT_EQ(actual, expected);
+    std::vector<std::tuple<int, int>> test { { 1, 1 }, { 2, 2 }, { 4, 4 }, { 5, 5}, { 3, 3 }, { 5, 3 }, { 1, 1 }};
+
+    auto results = instance.predict(test);
+
+    for (int i = 0; i < test.size(); ++i)
+    {
+        std::cout << std::get<0>(test[i]) << ", " << std::get<1>(test[i]) << ": " << results[i] << std::endl;
+    }
+
+    ASSERT_EQ(1, 2);
 }
